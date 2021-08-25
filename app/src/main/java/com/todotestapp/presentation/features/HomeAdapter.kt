@@ -1,15 +1,16 @@
-package com.todotestapp.presentation
+package com.todotestapp.presentation.features
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.todotestapp.databinding.ItemTaskBinding
-import com.todotestapp.domain.models.TaskModel //TODO: change to local model
+import com.todotestapp.presentation.models.TaskUi
 
-class TasksAdapter : RecyclerView.Adapter<TasksAdapter.ViewHolder>() {
-    private var tasksList = mutableListOf<TaskModel>()
+class HomeAdapter(val itemChecked: (TaskUi) -> Unit) :
+    RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
+    private var tasksList = mutableListOf<TaskUi>()
 
-    fun submitList(list: List<TaskModel>) {
+    fun submitList(list: List<TaskUi>) {
         tasksList.clear()
         tasksList.addAll(list)
         notifyDataSetChanged()
@@ -23,11 +24,12 @@ class TasksAdapter : RecyclerView.Adapter<TasksAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = tasksList.size
 
-    class ViewHolder(private val binding: ItemTaskBinding) :
+    inner class ViewHolder(private val binding: ItemTaskBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(task: TaskModel) {
+        fun bind(task: TaskUi) {
             binding.cbMark.isChecked = task.completed
             binding.tvTaskTitle.text = task.title
+            binding.cbMark.setOnClickListener { itemChecked(task) }
         }
     }
 }

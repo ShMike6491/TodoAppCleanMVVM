@@ -7,26 +7,31 @@ import com.todotestapp.domain.repositories.ITaskRepository
 class TaskRepositoryImpl : ITaskRepository {
     private val tempDb = TempTaskStore()
 
-    override fun getAll(): List<TaskModel> = tempDb.getAllTasks()
+    override fun getAll(): List<TaskModel> =
+        tempDb.getAllTasks()
 
 
-    override fun getById(id: Int): TaskModel? {
-        TODO("Not yet implemented")
-    }
+    override fun getById(id: Int): TaskModel? =
+        tempDb.findTaskById(id)
+
 
     override fun update(task: TaskModel): Boolean {
-        TODO("Not yet implemented")
+        tempDb.insertTask(task)
+        return true
     }
 
     override fun insert(task: TaskModel): Boolean {
-        TODO("Not yet implemented")
+        tempDb.insertTask(task)
+        return true
     }
 
     override fun deleteAll(): Boolean {
-        TODO("Not yet implemented")
+        tempDb.deleteAll()
+        return true
     }
 
     override fun deleteById(id: Int): Boolean {
-        TODO("Not yet implemented")
+        tempDb.deleteById(id)
+        return true
     }
 }
