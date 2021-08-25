@@ -10,6 +10,7 @@ import com.todotestapp.databinding.FragmentHomeBinding
 import com.todotestapp.domain.usecases.GetAllTasksUseCase
 import com.todotestapp.domain.usecases.MakeNewTaskUseCase
 import com.todotestapp.domain.usecases.MarkTaskAsDoneSwitchUseCase
+import com.todotestapp.presentation.TodoApp
 import com.todotestapp.presentation.models.TaskUi
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -18,7 +19,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private val adapter = HomeAdapter { clickCallback(it) }
     private val viewModel: HomeViewModel by viewModels {
-        val repository = TaskRepositoryImpl()
+        val database = ((requireActivity().application) as TodoApp).database
+        val repository = TaskRepositoryImpl(database.taskDao())
         HomeViewModel.Factory(
             GetAllTasksUseCase(repository),
             MarkTaskAsDoneSwitchUseCase(repository),

@@ -1,37 +1,36 @@
 package com.todotestapp.data.repositories
 
-import com.todotestapp.data.persistence.TempTaskStore
+import com.todotestapp.data.mappers.asDatabaseModel
+import com.todotestapp.data.mappers.asDomainModel
 import com.todotestapp.domain.models.TaskModel
 import com.todotestapp.domain.repositories.ITaskRepository
 
-class TaskRepositoryImpl : ITaskRepository {
-    private val tempDb = TempTaskStore()
-
+class TaskRepositoryImpl(private val localStorage: ILocalStorage) : ITaskRepository {
     override fun getAll(): List<TaskModel> =
-        tempDb.getAllTasks()
+        localStorage.getAll().asDomainModel()
 
 
     override fun getById(id: Int): TaskModel? =
-        tempDb.findTaskById(id)
+        localStorage.findById(id)?.asDomainModel()
 
 
     override fun update(task: TaskModel): Boolean {
-        tempDb.insertTask(task)
+        localStorage.update(task.asDatabaseModel())
         return true
     }
 
     override fun insert(task: TaskModel): Boolean {
-        tempDb.insertTask(task)
+        localStorage.insert(task.asDatabaseModel())
         return true
     }
 
     override fun deleteAll(): Boolean {
-        tempDb.deleteAll()
+        localStorage.deleteAll()
         return true
     }
 
     override fun deleteById(id: Int): Boolean {
-        tempDb.deleteById(id)
+        localStorage.deleteById(id)
         return true
     }
 }
