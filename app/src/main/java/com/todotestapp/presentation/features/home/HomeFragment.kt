@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.todotestapp.R
 import com.todotestapp.databinding.FragmentHomeBinding
 import com.todotestapp.presentation.TodoApp
-import com.todotestapp.presentation.features.add_edit.AddEditDialog
 import com.todotestapp.presentation.models.TaskUi
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -28,9 +28,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private val navCallback = { task: TaskUi ->
-        // TODO make normal navigation
-        val bottomDialog = AddEditDialog.newInstance( task )
-        bottomDialog.show(requireActivity().supportFragmentManager, "temp")
+        val action = HomeFragmentDirections.actionHomeFragmentToAddEditDialog( task )
+        findNavController().navigate(action)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,9 +40,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewModel.getTaskData().observe(viewLifecycleOwner, { adapter.submitList(it) })
 
         b.fabAddNew.setOnClickListener {
-            // TODO make normal navigation
-            val bottomDialog = AddEditDialog.newInstance()
-            bottomDialog.show(requireActivity().supportFragmentManager, "temp")
+            val action = HomeFragmentDirections.actionHomeFragmentToAddEditDialog()
+            findNavController().navigate(action)
         }
     }
 

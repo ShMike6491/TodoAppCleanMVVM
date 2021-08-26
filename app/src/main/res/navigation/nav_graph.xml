@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.todotestapp.presentation.features.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_addEditDialog"
+            app:destination="@id/addEditDialog" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/addEditDialog"
+        android:name="com.todotestapp.presentation.features.add_edit.AddEditDialog"
+        android:label="bottom_dialog_add_edit"
+        tools:layout="@layout/bottom_dialog_add_edit" >
+        <argument
+            android:name="task"
+            app:argType="com.todotestapp.presentation.models.TaskUi"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </dialog>
+
+</navigation>

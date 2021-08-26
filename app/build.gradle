@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -64,4 +65,9 @@ dependencies {
 
     //Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${rootProject.coroutines}"
+
+    //Navigation component
+    implementation "androidx.navigation:navigation-fragment-ktx:${rootProject.navigationVersion}"
+    implementation "androidx.navigation:navigation-ui-ktx:${rootProject.navigationVersion}"
+
 }
