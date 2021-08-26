@@ -5,16 +5,19 @@ import com.todotestapp.domain.usecases.GetAllTasksUseCase
 import com.todotestapp.domain.usecases.MarkTaskAsDoneSwitchUseCase
 import com.todotestapp.presentation.mappers.asPresentationModel
 import com.todotestapp.presentation.models.TaskUi
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel(
+@HiltViewModel
+class HomeViewModel @Inject constructor(
     private val getTasksUseCase: GetAllTasksUseCase,
     private val markDoneUseCase: MarkTaskAsDoneSwitchUseCase
 ) : ViewModel() {
 
     fun getTaskData(): LiveData<List<TaskUi>> {
-        val presentationFlow = getTasksUseCase.execute().map{it.asPresentationModel()}
+        val presentationFlow = getTasksUseCase.execute().map { it.asPresentationModel() }
         return presentationFlow.asLiveData()
     }
 

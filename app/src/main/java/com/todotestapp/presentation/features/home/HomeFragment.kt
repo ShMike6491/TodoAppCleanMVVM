@@ -7,21 +7,16 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.todotestapp.R
 import com.todotestapp.databinding.FragmentHomeBinding
-import com.todotestapp.presentation.TodoApp
 import com.todotestapp.presentation.models.TaskUi
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private var binding: FragmentHomeBinding? = null
     private val b get() = binding!!
 
     private val adapter = HomeAdapter ({ clickCallback(it) }, { navCallback(it) })
-    private val viewModel: HomeViewModel by viewModels {
-        val dependencies = (requireActivity().application) as TodoApp
-        HomeViewModel.Factory(
-            dependencies.getAllTasksUseCase,
-            dependencies.markSwitchUseCase
-        )
-    }
+    private val viewModel: HomeViewModel by viewModels()
 
     private val clickCallback = { task: TaskUi ->
         viewModel.itemChecked(task)

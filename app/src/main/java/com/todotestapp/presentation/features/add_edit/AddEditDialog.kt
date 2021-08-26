@@ -9,21 +9,13 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.todotestapp.R
 import com.todotestapp.databinding.BottomDialogAddEditBinding
-import com.todotestapp.presentation.TodoApp
-import com.todotestapp.presentation.models.TaskUi
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AddEditDialog : BottomSheetDialogFragment() {
 
     private val arguments: AddEditDialogArgs by navArgs()
-    private val viewModel: AddEditViewModel by viewModels {
-        val dependencies = (requireActivity().application) as TodoApp
-        val passedData: TaskUi? = arguments.task
-        AddEditViewModel.Factory(
-            passedData,
-            dependencies.makeNewTaskUseCae,
-            dependencies.updateExistingUseCase
-        )
-    }
+    private val viewModel: AddEditViewModel by viewModels()
 
     private var _binding: BottomDialogAddEditBinding? = null
     private val binding get() = _binding!!
@@ -41,6 +33,8 @@ class AddEditDialog : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = BottomDialogAddEditBinding.bind(view)
+
+        viewModel.init(arguments.task)
 
         viewModel.getText().observe(this, {
            if (it != null) binding.etTaskTitle.setText(it)
