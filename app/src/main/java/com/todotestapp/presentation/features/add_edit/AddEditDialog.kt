@@ -25,6 +25,9 @@ class AddEditDialog : BottomSheetDialogFragment() {
         )
     }
 
+    private var _binding: BottomDialogAddEditBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,8 +40,7 @@ class AddEditDialog : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val binding = BottomDialogAddEditBinding.bind(view)
+        _binding = BottomDialogAddEditBinding.bind(view)
 
         viewModel.getText().observe(this, {
            if (it != null) binding.etTaskTitle.setText(it)
@@ -49,5 +51,10 @@ class AddEditDialog : BottomSheetDialogFragment() {
         binding.btnSubmit.setOnClickListener {
             viewModel.onSubmit(binding.etTaskTitle.text.toString())
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
