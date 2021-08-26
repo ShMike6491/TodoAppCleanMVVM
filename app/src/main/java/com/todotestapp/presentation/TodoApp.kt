@@ -4,5 +4,5 @@ import android.app.Application
 import com.todotestapp.data.persistence.TaskDataBase
 
 class TodoApp : Application() {
-    val database by lazy { TaskDataBase.getDatabase(this) }
+    val database by lazy { com.todotestapp.data.persistence.TaskDataBase.getDatabase(this) }
 }

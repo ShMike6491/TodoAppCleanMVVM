@@ -18,7 +18,7 @@ class AddEditDialog : BottomSheetDialogFragment() {
 
     private val viewModel: AddEditViewModel by viewModels {
         val database = ((requireActivity().application) as TodoApp).database
-        val repository = TaskRepositoryImpl(database.taskDao())
+        val repository = com.todotestapp.data.repositories.TaskRepositoryImpl(database.taskDao())
         val passedData: TaskUi? = arguments?.getParcelable(DETAILS_TAG)
         AddEditViewModel.Factory(
             passedData,
