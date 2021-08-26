@@ -5,10 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.todotestapp.R
-import com.todotestapp.data.repositories.TaskRepositoryImpl
 import com.todotestapp.databinding.FragmentHomeBinding
-import com.todotestapp.domain.usecases.GetAllTasksUseCase
-import com.todotestapp.domain.usecases.MarkTaskAsDoneSwitchUseCase
 import com.todotestapp.presentation.TodoApp
 import com.todotestapp.presentation.features.add_edit.AddEditDialog
 import com.todotestapp.presentation.models.TaskUi
@@ -19,11 +16,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private val adapter = HomeAdapter ({ clickCallback(it) }, { navCallback(it) })
     private val viewModel: HomeViewModel by viewModels {
-        val database = ((requireActivity().application) as TodoApp).database
-        val repository = TaskRepositoryImpl(database.taskDao())
+        val dependencies = (requireActivity().application) as TodoApp
         HomeViewModel.Factory(
-            GetAllTasksUseCase(repository),
-            MarkTaskAsDoneSwitchUseCase(repository)
+            dependencies.getAllTasksUseCase,
+            dependencies.markSwitchUseCase
         )
     }
 

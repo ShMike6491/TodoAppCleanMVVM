@@ -7,23 +7,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.todotestapp.R
-import com.todotestapp.data.repositories.TaskRepositoryImpl
 import com.todotestapp.databinding.BottomDialogAddEditBinding
-import com.todotestapp.domain.usecases.MakeNewTaskUseCase
-import com.todotestapp.domain.usecases.UpdateExistingTaskUseCase
 import com.todotestapp.presentation.TodoApp
 import com.todotestapp.presentation.models.TaskUi
 
 class AddEditDialog : BottomSheetDialogFragment() {
 
     private val viewModel: AddEditViewModel by viewModels {
-        val database = ((requireActivity().application) as TodoApp).database
-        val repository = com.todotestapp.data.repositories.TaskRepositoryImpl(database.taskDao())
+        val dependencies = (requireActivity().application) as TodoApp
         val passedData: TaskUi? = arguments?.getParcelable(DETAILS_TAG)
         AddEditViewModel.Factory(
             passedData,
-            MakeNewTaskUseCase(repository),
-            UpdateExistingTaskUseCase(repository)
+            dependencies.makeNewTaskUseCae,
+            dependencies.updateExistingUseCase
         )
     }
 
