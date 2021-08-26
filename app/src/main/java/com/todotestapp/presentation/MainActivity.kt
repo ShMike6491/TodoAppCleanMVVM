@@ -3,7 +3,7 @@ package com.todotestapp.presentation
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.todotestapp.R
-import com.todotestapp.presentation.features.HomeFragment
+import com.todotestapp.presentation.features.home.HomeFragment
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 

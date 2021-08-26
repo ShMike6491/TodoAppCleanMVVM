@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:paddingEnd="6dp">
 
     <CheckBox
         android:id="@+id/cb_mark"
@@ -15,5 +16,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="Sample task title" />
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <ImageView
+        android:id="@+id/iv_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_edit_24" />
 
 </LinearLayout>
