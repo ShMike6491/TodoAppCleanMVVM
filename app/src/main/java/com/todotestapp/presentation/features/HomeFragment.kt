@@ -37,8 +37,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding = FragmentHomeBinding.bind(view)
 
         b.rvTasks.adapter = adapter
-        viewModel.onAttach()
-        viewModel.taskData.observe(viewLifecycleOwner, { adapter.submitList(it) })
+        viewModel.getTaskData().observe(viewLifecycleOwner, { adapter.submitList(it) })
 
         b.fabAddNew.setOnClickListener {
             viewModel.newTaskCreated(TaskUi(6, "test", false))

@@ -4,32 +4,34 @@ import com.todotestapp.data.mappers.asDatabaseModel
 import com.todotestapp.data.mappers.asDomainModel
 import com.todotestapp.domain.models.TaskModel
 import com.todotestapp.domain.repositories.ITaskRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class TaskRepositoryImpl(private val localStorage: ILocalStorage) : ITaskRepository {
-    override fun getAll(): List<TaskModel> =
-        localStorage.getAll().asDomainModel()
+    // решил приводить типы в репозитории, чтобы конкретные интерфейсы
+    // не имели информацию о моделях domain слоя
+    override fun getAll(): Flow<List<TaskModel>> =
+        localStorage.getAll().map { it.asDomainModel() }
 
-
-    override fun getById(id: Int): TaskModel? =
+    override suspend fun getById(id: Int): TaskModel? =
         localStorage.findById(id)?.asDomainModel()
 
-
-    override fun update(task: TaskModel): Boolean {
+    override suspend fun update(task: TaskModel): Boolean {
         localStorage.update(task.asDatabaseModel())
         return true
     }
 
-    override fun insert(task: TaskModel): Boolean {
+    override suspend fun insert(task: TaskModel): Boolean {
         localStorage.insert(task.asDatabaseModel())
         return true
     }
 
-    override fun deleteAll(): Boolean {
+    override suspend fun deleteAll(): Boolean {
         localStorage.deleteAll()
         return true
     }
 
-    override fun deleteById(id: Int): Boolean {
+    override suspend fun deleteById(id: Int): Boolean {
         localStorage.deleteById(id)
         return true
     }

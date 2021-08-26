@@ -13,12 +13,13 @@ abstract class TaskDataBase: RoomDatabase() {
     companion object {
         private const val DATABASE_NAME = "task_db"
         @Volatile
-        private var INSTANCE: TaskDataBase? = null;
+        private var INSTANCE: TaskDataBase? = null
 
         fun getDatabase(context: Context): TaskDataBase {
             return INSTANCE ?: synchronized(this) {
                 val instance =
                     Room.databaseBuilder(context, TaskDataBase::class.java, DATABASE_NAME)
+                        .fallbackToDestructiveMigration()
                         .build()
                 INSTANCE = instance
                 instance

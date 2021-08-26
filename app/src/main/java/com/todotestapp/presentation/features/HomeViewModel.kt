@@ -1,17 +1,14 @@
 package com.todotestapp.presentation.features
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import com.todotestapp.domain.usecases.GetAllTasksUseCase
 import com.todotestapp.domain.usecases.MakeNewTaskUseCase
 import com.todotestapp.domain.usecases.MarkTaskAsDoneSwitchUseCase
 import com.todotestapp.presentation.mappers.asDomainModel
 import com.todotestapp.presentation.mappers.asPresentationModel
 import com.todotestapp.presentation.models.TaskUi
-
-private const val UNKNOWN_VM_EXCEPTION = "Unknown view model class"
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 
 class HomeViewModel(
     private val getTasksUseCase: GetAllTasksUseCase,
@@ -19,23 +16,17 @@ class HomeViewModel(
     private val makeNewUseCase: MakeNewTaskUseCase
 ) : ViewModel() {
 
-    private val _taskData = MutableLiveData<List<TaskUi>>()
-    val taskData: LiveData<List<TaskUi>> = _taskData
+    fun getTaskData(): LiveData<List<TaskUi>> {
+        val presentationFlow = getTasksUseCase.execute().map{it.asPresentationModel()}
+        return presentationFlow.asLiveData()
+    }
 
-    fun onAttach() = update()
-
-    fun newTaskCreated(task: TaskUi) {
+    fun newTaskCreated(task: TaskUi) = viewModelScope.launch {
         makeNewUseCase.execute(task.asDomainModel())
-        update()
     }
 
-    fun itemChecked(task: TaskUi) {
+    fun itemChecked(task: TaskUi) = viewModelScope.launch {
         markDoneUseCase.execute(task.id)
-        update()
-    }
-
-    private fun update() {
-        _taskData.value = getTasksUseCase.execute().asPresentationModel()
     }
 
     class Factory(
@@ -52,4 +43,7 @@ class HomeViewModel(
         }
     }
 }
+
+private const val UNKNOWN_VM_EXCEPTION = "Unknown view model class"
+
 
