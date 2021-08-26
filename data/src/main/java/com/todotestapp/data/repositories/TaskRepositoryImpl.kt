@@ -7,7 +7,10 @@ import com.todotestapp.domain.repositories.ITaskRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
+// можно добавить сюда параметр INetworkService если бы
+// прилошлось иметь дело с запросами в backend
 class TaskRepositoryImpl(private val localStorage: ILocalStorage) : ITaskRepository {
+
     // решил приводить типы в репозитории, чтобы конкретные интерфейсы
     // не имели информацию о моделях domain слоя
     override fun getAll(): Flow<List<TaskModel>> =

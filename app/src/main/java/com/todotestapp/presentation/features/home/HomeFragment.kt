@@ -18,10 +18,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val adapter = HomeAdapter ({ clickCallback(it) }, { navCallback(it) })
     private val viewModel: HomeViewModel by viewModels()
 
+    // callback для обрабатывания события об отмеченных заданиях
     private val clickCallback = { task: TaskUi ->
         viewModel.itemChecked(task)
     }
 
+    // callback для открытия окна редактирования
     private val navCallback = { task: TaskUi ->
         val action = HomeFragmentDirections.actionHomeFragmentToAddEditDialog( task )
         findNavController().navigate(action)
@@ -34,6 +36,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         b.rvTasks.adapter = adapter
         viewModel.getTaskData().observe(viewLifecycleOwner, { adapter.submitList(it) })
 
+        // открытие окна для добавления нового таска
         b.fabAddNew.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToAddEditDialog()
             findNavController().navigate(action)

@@ -40,6 +40,7 @@ class AddEditDialog : BottomSheetDialogFragment() {
            if (it != null) binding.etTaskTitle.setText(it)
         })
 
+        // обработка закрытия окна
         viewModel.onDismiss.observe(this, { dismiss() })
 
         binding.btnSubmit.setOnClickListener {

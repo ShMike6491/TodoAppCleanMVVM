@@ -21,8 +21,10 @@ class AddEditViewModel @Inject constructor(
 
     private val textToDisplay = MutableLiveData<String?>()
 
+    // передаем модель из аргументов, чтобы правильно обработать событие редактирования / создания
     fun init(task: TaskUi? = null) { model = task }
 
+    // управление отображением текста у диалога
     fun getText(): LiveData<String?> {
         if (model != null) textToDisplay.value = model?.title
         return textToDisplay
