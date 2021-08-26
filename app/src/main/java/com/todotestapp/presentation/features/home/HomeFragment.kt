@@ -20,7 +20,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val adapter = HomeAdapter ({ clickCallback(it) }, { navCallback(it) })
     private val viewModel: HomeViewModel by viewModels {
         val database = ((requireActivity().application) as TodoApp).database
-        val repository = com.todotestapp.data.repositories.TaskRepositoryImpl(database.taskDao())
+        val repository = TaskRepositoryImpl(database.taskDao())
         HomeViewModel.Factory(
             GetAllTasksUseCase(repository),
             MarkTaskAsDoneSwitchUseCase(repository)

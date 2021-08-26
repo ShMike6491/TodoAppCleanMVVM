@@ -6,13 +6,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.todotestapp"
-        minSdkVersion 23
-        targetSdkVersion 30
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -41,28 +41,27 @@ android {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-
     implementation project(path: ':domain')
     implementation project(path: ':data')
 
-    implementation 'androidx.core:core-ktx:1.6.0'
-    implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.fragment:fragment-ktx:1.3.2'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "androidx.core:core-ktx:${rootProject.androidXCoreKtx}"
+    implementation "androidx.appcompat:appcompat:${rootProject.androidXAppCompat}"
+    implementation "com.google.android.material:material:${rootProject.material}"
+    implementation "androidx.fragment:fragment-ktx:${rootProject.androidXFragment}"
+    implementation "androidx.constraintlayout:constraintlayout:${rootProject.androidXConstraintLayout}"
+    testImplementation "junit:junit:${rootProject.junit}"
+    androidTestImplementation "androidx.test.ext:junit:${rootProject.androidXJunit}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${rootProject.androidXEspressoCore}"
 
     //LiveData
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:${rootProject.androidXLivecycle}"
 
     //Room
-    implementation "androidx.room:room-ktx:2.3.0"
-    kapt "androidx.room:room-compiler:2.3.0"
-    androidTestImplementation "androidx.room:room-testing:2.3.0"
+    implementation "androidx.room:room-ktx:${rootProject.roomVersion}"
+    kapt "androidx.room:room-compiler:${rootProject.roomVersion}"
+    androidTestImplementation "androidx.room:room-testing:${rootProject.roomVersion}"
 
     //Coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${rootProject.coroutines}"
 }
