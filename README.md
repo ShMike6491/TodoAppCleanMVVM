@@ -4,12 +4,14 @@ I didn't delve deeply into the functionality but rather focused more on creating
 Therefore, the application doesn't have any special features (it only contains two screens and a couple of functions). 
 It's possible to add new tasks, modify task descriptions, and mark something as completed.
 
-<img src="https://github.com/ShMike6491/TodoAppCleanMVVM/blob/master/screenshot_1.jpg" width="300">
-<img src="https://github.com/ShMike6491/TodoAppCleanMVVM/blob/master/screenshot_2.jpg" width="300">
+<div style="text-align: center;">
+  <img src="https://github.com/ShMike6491/TodoAppCleanMVVM/blob/master/screenshot_1.jpg" width="300" style="display: inline-block; margin: 0 10px;">
+  <img src="https://github.com/ShMike6491/TodoAppCleanMVVM/blob/master/screenshot_2.jpg" width="300" style="display: inline-block; margin: 0 10px;">
+</div>
 
 ## Architecture
 
-<img src="https://github.com/ShMike6491/TodoAppCleanMVVM/blob/master/architecture.jpg" width="300">
+<img align="center" src="https://github.com/ShMike6491/TodoAppCleanMVVM/blob/master/architecture.jpg" width="400">
 
 The project comprises only three modules, namely:
 
