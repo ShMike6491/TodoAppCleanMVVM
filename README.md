@@ -1,15 +1,15 @@
 ## About
 
-"I didn't delve deeply into the functionality but rather focused more on creating the architecture. 
+I didn't delve deeply into the functionality but rather focused more on creating the architecture. 
 Therefore, the application doesn't have any special features (it only contains two screens and a couple of functions). 
 It's possible to add new tasks, modify task descriptions, and mark something as completed.
 
-<img width="30%" align="center" src="https://github.com/ShMike6491/TodoAppCleanMVVM/screenshot_1.jpeg?raw=true"> 
-<img width="30%" align="center" src="https://github.com/ShMike6491/TodoAppCleanMVVM/screenshot_2.jpeg?raw=true"> 
+<img width="30%" align="center" src="https://github.com/ShMike6491/TodoAppCleanMVVM/blob/master/screenshot_1.jpeg?raw=true"> 
+<img width="30%" align="center" src="https://github.com/ShMike6491/TodoAppCleanMVVM/blob/master/screenshot_2.jpeg?raw=true"> 
 
 ## Architecture
 
-<img width="30%" align="center" src="https://github.com/ShMike6491/TodoAppCleanMVVM/architecture.jpeg?raw=true"> 
+<img width="30%" align="center" src="https://github.com/ShMike6491/TodoAppCleanMVVM/blob/master/architecture.jpeg?raw=true"> 
 
 The project comprises only three modules, namely:
 
